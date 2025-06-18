@@ -1,6 +1,4 @@
-
 const mongoose = require("mongoose");
-const User = require("./User");
 
 const userSchema = new mongoose.Schema(
   {
@@ -17,6 +15,12 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["admin", "agent", "landlord", "buyer", "tenant"],
+      default: "buyer",
       required: true,
     },
   },

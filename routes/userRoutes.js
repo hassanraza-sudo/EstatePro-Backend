@@ -1,22 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const { loginUser } = require("../controllers/userController");
+
 const {
   getAllUsers,
   getUserById,
   updateUser,
   deleteUser,
+  registerUser, // 👈 import new controller
 } = require("../controllers/userController");
 
-// GET /api/users — get all users
+// 👇 ADD THIS ROUTE at the top (before routes with `:id`)
+router.post("/register", registerUser); // POST /api/users/register
+router.post("/login", loginUser);
+
 router.get("/", getAllUsers);
-
-// GET /api/users/:id — get a single user by ID
 router.get("/:id", getUserById);
-
-// PUT /api/users/:id — update user by ID
 router.put("/:id", updateUser);
-
-// DELETE /api/users/:id — delete user by ID
 router.delete("/:id", deleteUser);
 
 module.exports = router;
