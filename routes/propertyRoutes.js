@@ -28,9 +28,21 @@ router.get("/", async (req, res) => {
 
     const properties = await Property.find(filter).sort({ createdAt: -1 });
     res.status(200).json(properties);
-    console.log("Fetched properties:", properties);
   } catch (error) {
     console.error("Failed to fetch properties:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// ✅ GET /api/properties/featured — for homepage
+router.get("/featured", async (req, res) => {
+  try {
+    const featured = await Property.find({ isFeatured: true }).sort({
+      createdAt: -1,
+    });
+    res.status(200).json(featured);
+  } catch (error) {
+    console.error("Failed to fetch featured properties:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
