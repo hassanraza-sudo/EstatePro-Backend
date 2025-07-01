@@ -22,16 +22,19 @@ const propertySchema = new mongoose.Schema({
   images: { type: [String], default: [] },
   bedrooms: { type: Number, default: 0 },
   bathrooms: { type: Number, default: 0 },
-  area: { type: Number, default: 0 }, // sq ft
+  area: { type: Number, default: 0 }, // in sq ft
   isFeatured: { type: Boolean, default: false },
+  newListing: { type: Boolean, default: false },
 
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  newListing: {
-    type: Boolean,
-    default: false,
+
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
 });
 
